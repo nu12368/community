@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="../../plugins/waitme/waitMe.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+
+    <!-- cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- modal  -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- modal  -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <!-- <script type="text/javascript" src="../getlogo_name.js"></script> -->
+</head>
+
+
+
+<script>
+    if (Cookies.get('username') == undefined) {
+        Cookies.remove('username');
+        // location.href = "index.html";
+    }
+    var co = Cookies.get('username');
+
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var ti = today.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric"
+    });
+
+    // today = dd + '/' + mm + '/' + yyyy + ' ' + ti;
+    today = mm + '/' + dd + '/' + yyyy;
+    $(document).ready(function () {
+        $("#usernamelogin").text('ชื่อผู้ใช้งาน : ' + co);
+
+
+        $("#startdate").val(today);
+        //$("#duedate").val(today);
+
+    });
+
+</script>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" id="logoname" href="../../viewdashboard.html"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
+                            data-close="true">[ออกจากระบบ]</a></li>
+                    <script>
+                        function logout() {
+                            location.href = "index.html";
+                            Cookies.remove('username');
+                        }
+                    </script>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar" style="text-align: center;">
+            <!-- User Info -->
+            <div class="user-info" style="text-align:center;">
+                <div class="image" style="display: none;">
+                    <img id="LOGOVIEW" name="LOGOVIEW" width="100" height="100" alt="User" />
+                    <p id="usernamelogin" style="color:white;"></p>
+                </div>
+                <!-- <div class="info-container ">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                        <div class="email">john.doe@example.com</div>
+                       
+                    </div> -->
+            </div>
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        <a href="viewdashboard.html">
+                            <i class="material-icons">home</i>
+                            <span>หน้าแรก</span>
+                        </a>
+                    </li>
+
+                    <li style="text-align: left;" class="header"></li>
+                    <li>
+                        <a href="registerlist.html">
+                            <i class="material-icons">account_circle</i>
+                            <span>รายชื่อผู้ลงทะเบียน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="register.html">
+                            <i class="material-icons">group_add</i>
+                            <span>ลงทะเบียน</span>
+                        </a>
+                    </li>
+                    <li style="text-align: left;" class="header"></li>
+
+
+                    <li>
+                        <a href="invoice.html">
+                            <i class="material-icons">local_atm</i>
+                            <span>ทำรายการชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allInvoice.html">
+                            <i class="material-icons">art_track</i>
+                            <span>รายการค้างชำระ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allpayment.html">
+                            <i class="material-icons">beenhere</i>
+                            <span>รายการที่ชำระแล้ว</span>
+                        </a>
+                    </li>
+
+                    <li class="header"></li>
+
+                    <li class="active">
+                        <a href="payment.html">
+                            <i class="material-icons">attach_money</i>
+                            <span>ชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li class="header"></li>
+
+
+                    <li>
+                        <a href="appeal.html">
+                            <i class="material-icons">pan_tool</i>
+                            <span>รายการร้องเรียน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inform.html">
+                            <i class="material-icons">report_problem</i>
+                            <span>รายการแจ้งเหตุ</span>
+                        </a>
+                    </li>
+                    <li class="header"></li>
+                    <li>
+                        <a href="allnotice.html">
+                            <i class="material-icons">record_voice_over</i>
+                            <span>ประกาศ</span>
+                        </a>
+                    </li>
+
+
+                    <li class="header"></li>
+                    <li>
+                        <a href="allservice.html">
+                            <i class="material-icons">local_laundry_service</i>
+                            <span>ข้อมูลบริการ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="alltravel.html">
+                            <i class="material-icons">card_travel</i>
+                            <span>ข้อมูลท่องเที่ยว</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allbusiness.html">
+                            <i class="material-icons">business</i>
+                            <span>ข้อมูลธุรกิจ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allasset.html">
+                            <i class="material-icons">account_balance</i>
+                            <span>ทรัพย์สิน</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="informationservice.html">
+                            <i class="material-icons">local_laundry_service</i>
+                            <span>แจ้งข้อมูลบริการ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="informationtravel.html">
+                            <i class="material-icons">card_travel</i>
+                            <span>แจ้งข้อมูลท่องเที่ยว</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="informationbusiness.html">
+                            <i class="material-icons">business</i>
+                            <span>แจ้งข้อมูลธุรกิจ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="informationasset.html">
+                            <i class="material-icons">account_balance</i>
+                            <span>แจ้งทรัพย์สิน</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header navbar">
+                                    <h2>
+                                        <font style="color: white;">ชำระเงิน
+                                        </font>
+                                    </h2>
+                                </div>
+                                <div class="body">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" style="font-size: 18px;"
+                                                data-toggle="tab">ค้นหาข้อมูลที่ต้องชำระ </a></li>
+                                        <li role="presentation"><a href="#profile" data-toggle="tab"
+                                                style="font-size: 18px;">อัพโหลด (.csv) ไฟล์</a></li>
+                                        <!-- <li role="presentation"><a href="#messages" data-toggle="tab">MESSAGES</a></li>
+                                            <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <div class="body">
+                                                <form id="formElem">
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control" name="ref2"
+                                                                        id="ref2" value="" required autocomplete="off"
+                                                                        placeholder="ค้นหาหมายเลขอ้างอิง ref2" />
+                                                                    <input type="text" name="idInvoice" id="idInvoice"
+                                                                        value="" style="display: none;" required />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <button class="btn btn-primary waves-effect"
+                                                                onclick="searchdata()" id="myButton"
+                                                                class="primary" name="myButton"
+                                                                type="button">ค้นหา</button>
+                                                            <p style="font-size: 18px;;" id="lbl_1"></p>
+                                                            <!-- <input type="button" value="ค้นหา" onclick="searchdata()"
+                                                                class="btn btn-primary waves-effect" id="myButton"
+                                                                class="primary" name="myButton" /> -->
+                                                        </div>
+
+                                                        <script>
+
+                                                            $("#ref2").keyup(function (event) {
+                                                                if (event.keyCode === 13) {
+                                                                    $("#myButton").click();
+                                                                    return;
+                                                                }
+                                                            });
+                                                            $("#myButton").click(function () {
+
+                                                                searchdata();
+                                                                return;
+                                                            });
+
+
+                                                            function searchdata() {
+                                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                                                                    var urlipaddress = data.substring(1, data.length - 1);
+
+                                                                    document.getElementById("_address").value = "";
+                                                                    document.getElementById("_list").value = "";
+                                                                    document.getElementById("_amount").value = "";
+                                                                    document.getElementById("_startdate").value = "";
+                                                                    document.getElementById("_duedate").value = "";
+                                                                    document.getElementById("idInvoice").value = "";
+
+                                                                    if (document.getElementById("ref2").value == "") {
+                                                                        document.getElementById("title").innerText = 'ค้นหาข้อมูล';
+
+                                                                        // $("#myModaldont").modal();
+                                                                        // document.getElementById("completed").style.display = 'none';
+                                                                        // document.getElementById("c_delete").style.display = 'block';
+                                                                        document.getElementById("lbl_1").innerText = 'กรุณาใส่หมายเลขอ้างอิง ref2 !!!';
+                                                                        // document.getElementById("btn_print").style.display = 'none';
+                                                                        document.getElementById("lbl_1").style.color = "red";
+                                                                        return;
+                                                                    }
+                                                                    document.getElementById("ref2").style.borderColor = null;
+                                                                    var ref2 = document.getElementById("ref2").value
+                                                                    const url = urlipaddress + 'payment/' + ref2;
+
+
+                                                                    axios.get(url
+                                                                    ).then(function (response) {
+
+                                                                        if (response.data.message[0].payment.status == 'ชำระแล้ว') {
+                                                                            document.getElementById("lbl_1").innerText = 'รายการนี้ถูกชำระแล้ว';
+                                                                            document.getElementById("lbl_1").style.color = "blue";
+                                                                            // console.log('ชำระแล้ว')
+                                                                            // $("#myModaldont").modal();
+                                                                            // document.getElementById("completed").style.display = 'block';
+                                                                            // document.getElementById("c_delete").style.display = 'none';
+                                                                            // document.getElementById("lbl_completed").innerText = 'รายการนี้ถูกชำระแล้ว';
+                                                                            // document.getElementById("btn_print").style.display = 'none';
+
+
+                                                                            return;
+                                                                        }
+                                                                        document.getElementById("lbl_1").innerText = '';
+                                                                        // console.log(response.data.message[0])
+                                                                        document.getElementById("submitpostinvoice").style.display = "block";
+                                                                        document.getElementById("view").style.display = "block";
+                                                                        // document.getElementById("error").innerText = "";
+                                                                        document.getElementById("ref2").style.borderColor = "none";
+                                                                        document.getElementById("_address").value = response.data.message[0].ref1;
+                                                                        document.getElementById("_list").value = response.data.message[0].category;
+                                                                        document.getElementById("_amount").value = response.data.message[0].payment.amount;
+                                                                        document.getElementById("_startdate").value = response.data.message[0].startDate;
+                                                                        document.getElementById("_duedate").value = response.data.message[0].dueDate;
+                                                                        document.getElementById("idInvoice").value = response.data.message[0]._id;
+                                                                        document.getElementById("credit").value = response.data.message[0].payment.amount;
+
+                                                                        document.getElementById("statuspayment").value = response.data.message[0].payment.status;
+                                                                        document.getElementById("statuspayment").style.color = "red";
+
+
+
+
+                                                                        $("#print").attr("href", `print.html?ref2= ${ref2}`);
+                                                                        var today = new Date();
+                                                                        var dd = String(today.getDate()).padStart(2, '0');
+                                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                        var yyyy = today.getFullYear();
+                                                                        var ti = today.toLocaleTimeString('en-US', {
+                                                                            hour12: false,
+                                                                            hour: "numeric",
+                                                                            minute: "numeric"
+                                                                        });
+
+                                                                        today = dd + '/' + mm + '/' + yyyy + ' ' + ti;
+                                                                        console.log(today)
+                                                                        $(document).ready(function () {
+
+                                                                            $("#_creditDate").val(today);
+
+                                                                        });
+
+                                                                        /////////////////////// เอามาแสดง
+
+                                                                    }).catch(function (res) {
+                                                                        const { response } = res
+                                                                        document.getElementById("lbl_1").innerText = 'ไม่มีข้อมูลอยู่ในระบบ';
+                                                                        document.getElementById("lbl_1").style.color = "red";
+                                                                        console.log('ไม่มีข้อมูลอยู่ในระบบ')
+                                                                        document.getElementById("title").innerText = 'ค้นหาข้อมูล';
+                                                                        // $("#myModaldont").modal();
+                                                                        document.getElementById("completed").style.display = 'none';
+                                                                        document.getElementById("c_delete").style.display = 'block';
+                                                                        document.getElementById("lbl_completed").innerText = 'ไม่มีข้อมูลอยู่ในระบบ !!!';
+                                                                        document.getElementById("btn_print").style.display = 'none';
+                                                                        document.getElementById("view").style.display = "none";
+                                                                        document.getElementById("ref2").style.borderColor = "red";
+                                                                        //document.getElementById("error").innerText = "ไม่มีข้อมูลอยู่ในระบบ !!";
+                                                                        document.getElementById("_address").value = "";
+                                                                        document.getElementById("_list").value = "";
+                                                                        document.getElementById("_amount").value = "";
+                                                                        document.getElementById("_startdate").value = "";
+                                                                        document.getElementById("_duedate").value = "";
+                                                                        document.getElementById("idInvoice").value = "";
+
+                                                                    });
+                                                                });
+
+                                                                return;
+                                                            }
+                                                        </script>
+
+                                                    </div>
+                                                </form>
+
+
+                                                <div id="view" style="display: none;">
+                                                    <div class="row clearfix">
+                                                        <div class="col-sm-12">
+
+                                                            <div class="form-group">
+                                                                <h5>เลขที่บ้าน</h5>
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control"
+                                                                        name="_address" id="_address" value="" required
+                                                                        autocomplete="off" placeholder="เลขที่บ้าน" />
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h5>รายการที่ชำระ</h5>
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control" name="_list"
+                                                                        id="_list" value="" required autocomplete="off"
+                                                                        placeholder="รายการชำระ" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <h5>จำนวนเงินที่ต้องชำระ</h5>
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control"
+                                                                        name="_amount" id="_amount" value="" required
+                                                                        autocomplete="off"
+                                                                        placeholder="จำนวนเงินที่ต้องชำระ" />
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <h5>วันที่แจ้ง</h5>
+                                                                <div class="form-line">
+                                                                    <div>
+                                                                        <div class="form-line">
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="วันที่แจ้ง" id="_startdate"
+                                                                                autocomplete="off">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <h5>วันครบชำระ</h5>
+                                                                <div class="form-line">
+                                                                    <div class="form-control">
+                                                                        <div class="form-line">
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="วันครบชำระ" id="_duedate"
+                                                                                autocomplete="off">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <h5>ยอดเงินที่ชำระ</h5>
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control"
+                                                                        name="credit" id="credit" value="" required
+                                                                        autocomplete="off"
+                                                                        placeholder="ยอดเงินที่ชำระ" />
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <h5>ชำระผ่านช่องทาง</h5>
+                                                                <div class="form-line">
+                                                                    <select class="form-control show-tick" name="via"
+                                                                        id="via">
+                                                                        <option value="">- เลือกชำระผ่านช่องทาง -
+                                                                        </option>
+                                                                        <option value="เคาน์เตอร์เซอร์วิส">
+                                                                            เคาน์เตอร์เซอร์วิส</option>
+                                                                        <option value="ธนาคาร">ธนาคาร</option>
+                                                                        <option value="เจ้าหน้าที่">เจ้าหน้าที่</option>
+                                                                        <option value="สำนักงาน">สำนักงาน</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group form-float">
+                                                                <h5>วันที่ชำระ</h5>
+                                                                <div class="form-line">
+                                                                    <div class="input-group date"
+                                                                        id="bs_datepicker_component_container">
+                                                                        <div class="">
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="วันที่ชำระ"
+                                                                                autocomplete=off id="_creditDate">
+                                                                        </div>
+                                                                        <span class="input-group-addon">
+                                                                            <i class="material-icons"
+                                                                                style="cursor: pointer;">date_range</i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <h5>สถานะ</h5>
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control"
+                                                                        name="statuspayment" id="statuspayment" value=""
+                                                                        required autocomplete="off" placeholder="" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="button" value="ชำระเงิน"
+                                                        class="btn btn-primary waves-effect" onclick="savedata()"
+                                                        id="submitpostinvoice" class="primary" />
+                                                    <p style="font-size: 18px;;" id="lbl_csv">
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="profile">
+
+                                            <div class="body">
+
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="card">
+                                                            <div class="body">
+                                                                <h2 class="card-inside-title">ดาวน์โหลดไฟล์ (.csv)
+                                                                    รายการยังไม่ได้ชำระทั้งหมด</h2>
+                                                                <div class="row clearfix">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <div class="">
+                                                                                <button onclick="exportcsv()"
+                                                                                    id="exportcsv" name="exportcsv">
+                                                                                    <i class="fa fa-file-excel"></i>
+                                                                                    ดาวน์โหลดไฟล์ (.csv)</button>
+                                                                            </div>
+                                                                            <script>
+                                                                                function exportcsv() {
+                                                                                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                                        var urlipaddress = data.substring(1, data.length - 1);
+                                                                                        axios.get(urlipaddress + 'allInvoice').then((response) => {
+                                                                                            var cnt = response.data.message.length;
+                                                                                            var arr = new Array();
+                                                                                            var n = 0;
+                                                                                            for (i = 0; i < cnt; i++) {
+                                                                                                var cl = response.data.message[i].finance.length;
+                                                                                                for (a = 0; a < cl; a++) {
+                                                                                                    if (response.data.message[i].finance[a].payment.status == 'ค้างชำระ') {
+                                                                                                        arr[n] = {
+                                                                                                            no: response.data.message[i].finance[a]._id,
+                                                                                                            ref2: response.data.message[i].finance[a].ref2,
+                                                                                                            amount: response.data.message[i].finance[a].payment.amount,
+                                                                                                            credit: response.data.message[i].finance[a].payment.credit,
+                                                                                                            creditDate: response.data.message[i].finance[a].payment.creditDate,
+                                                                                                            receiveName: response.data.message[i].finance[a].payment.receiveName,
+                                                                                                            via: response.data.message[i].finance[a].payment.via
+                                                                                                        }
+                                                                                                        n = n + 1
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                            let csv = '';
+                                                                                            let header = Object.keys(arr[0]).join(',');
+                                                                                            let values = arr.map(o => Object.values(o).join(',')).join('\n');
+                                                                                            csv += header + '\n' + values;
+
+                                                                                            var csvFile;
+                                                                                            var downloadLink;
+
+                                                                                            if (window.Blob == undefined || window.URL == undefined || window.URL.createObjectURL == undefined) {
+                                                                                                alert("Your browser doesn't support Blobs");
+                                                                                                return;
+                                                                                            }
+
+                                                                                            csvFile = new Blob(["\uFEFF" + csv], { type: "text/csv; charset=utf-8" });
+
+                                                                                            downloadLink = document.createElement("a");
+                                                                                            downloadLink.download = 'allpayment.csv';
+                                                                                            downloadLink.href = window.URL.createObjectURL(csvFile);
+                                                                                            downloadLink.style.display = "none";
+                                                                                            document.body.appendChild(downloadLink);
+                                                                                            downloadLink.click();
+                                                                                        }).catch(function (res) {
+
+                                                                                            const { response } = res
+                                                                                        });
+                                                                                    });
+                                                                                }
+
+                                                                            </script>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="card">
+                                                            <div class="body">
+                                                                <h2 class="card-inside-title">เลือกไฟล์อัพโหลด (.csv)
+                                                                </h2>
+                                                                <div class="row clearfix">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <div class="">
+                                                                                <div class="form-group form-float">
+                                                                                    <input type="file"
+                                                                                        name="fileToUploadpaymentCSV"
+                                                                                        type="file" accept=".csv"
+                                                                                        placeholder="เลือกไฟล์อัพโหลด (.csv)"
+                                                                                        required
+                                                                                        id="fileToUploadpaymentCSV">
+                                                                                    <label
+                                                                                        class="form-label">เลือกไฟล์ต้องการชำระเงิน
+                                                                                        (.csv)</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="button"
+                                                                                value="อัพโหลดรายการชำระเงิน"
+                                                                                class="btn btn-primary waves-effect"
+                                                                                onclick="postdatapaymentCSV()"
+                                                                                id="upload2csv" class="primary" />
+
+
+                                                                        </div>
+                                                                        <p style="font-size: 18px;;" id="lbl_csv2"
+                                                                            name="lbl_csv2"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <script>
+                                            function postdatapaymentCSV() {
+                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                                                    var urlipaddress = data.substring(1, data.length - 1);
+
+                                                    ////// อัพโหลด paymentCSV
+                                                    var file_data = $('#fileToUploadpaymentCSV').prop('files')[0];
+                                                    if (file_data == undefined) {
+                                                        //   alert('dsds')
+                                                        document.getElementById("lbl_csv2").innerText = "กรุณาเลือกไฟล์ CSV !!!";
+                                                        document.getElementById("lbl_csv2").style.color = "red";
+                                                        // document.getElementById("title").innerText = 'กรุณาเลือกไฟล์ CSV';
+                                                        // $("#myModaldont").modal();
+                                                        // document.getElementById("completed").style.display = 'none';
+                                                        // document.getElementById("lbl_completed").innerText = 'กรุณาเลือกไฟล์ CSV !!!';
+                                                        // document.getElementById("btn_print").style.display = 'none';
+                                                        return;
+                                                    }
+                                                    var form_data = new FormData();
+                                                    form_data.append('csv', file_data);
+                                                    axios.post(urlipaddress + 'payMentCsv', form_data, {
+                                                        headers: {
+                                                            'Content-Type': 'multipart/form-data'
+                                                        }
+                                                    }).then(function (response) {
+
+                                                        // console.log(response.data.message);
+                                                        // console.log('บันทึกข้อมูลสำเร็จ')
+                                                        // document.getElementById("title").innerText = 'บันทึกข้อมูลสำเร็จ';
+
+                                                        // $("#myModaldont").modal();
+                                                        document.getElementById("lbl_csv2").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                                        document.getElementById("lbl_csv2").style.color = "green";
+                                                        // document.getElementById("c_delete").style.display = 'none';
+                                                        // document.getElementById("completed").style.display = 'block';
+                                                        // document.getElementById("btn_print").style.display = 'none';
+                                                    }).catch(function (res) {
+                                                        const { response } = res
+                                                        document.getElementById("lbl_csv2").innerText = 'บันทึกข้อมูลไม่สำเร็จ';
+                                                        document.getElementById("lbl_csv2").style.color = "red";
+                                                        // console.log(response.data.message);
+                                                        // console.log('บันทึกข้อมูลไม่สำเร็จ')
+                                                        // document.getElementById("title").innerText = 'บันทึกข้อมูลไม่สำเร็จ';
+                                                        // $("#myModaldont").modal();
+                                                        // document.getElementById("completed").style.display = 'none';
+                                                        // document.getElementById("lbl_completed").innerText = 'บันทึกข้อมูลไม่สำเร็จ !!!';
+                                                        // document.getElementById("btn_print").style.display = 'none';
+                                                    });
+
+                                                });
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+
+
+                ////////////////////////// รายได้
+                function savedata() {
+                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                        var urlipaddress = data.substring(1, data.length - 1);
+
+                        /////// เลขใบแจ้งหนี้ ว่าง
+                        var c__address = document.getElementById("_address").value;
+                        var c__list = document.getElementById("_list").value;
+                        var c__amount = document.getElementById("_amount").value;
+                        var c__startdate = document.getElementById("_startdate").value;
+                        var c__duedate = document.getElementById("_duedate").value;
+                        var c__idInvoice = document.getElementById("idInvoice").value;
+                        var c_creditDate = document.getElementById("_creditDate").value
+                        var c_via = document.getElementById("via").value
+                        var c_credit = document.getElementById("credit").value
+
+
+
+                        if (c__address == '' || c__list == '' || c__amount == '' || c__startdate == '' || c__duedate == '' || c__idInvoice == '' || c_creditDate == '' || c_via == '' || c_credit == '') {
+
+                            if (c__address == '') { document.getElementById("_address").style.borderColor = "red"; }
+                            if (c__list == '') { document.getElementById("_list").style.borderColor = "red"; }
+                            if (c__amount == '') { document.getElementById("_amount").style.borderColor = "red"; }
+                            if (c__startdate == '') { document.getElementById("_startdate").style.borderColor = "red"; }
+                            if (c__duedate == '') { document.getElementById("_duedate").style.borderColor = "red"; }
+                            if (c__idInvoice == '') { document.getElementById("idInvoice").style.borderColor = "red"; }
+                            if (c_creditDate == '') { document.getElementById("_creditDate").style.borderColor = "red"; }
+                            if (c_via == '') { document.getElementById("via").style.borderColor = "red"; }
+                            if (c_credit == '') { document.getElementById("credit").style.borderColor = "red"; }
+                            //  alert('sdsds')
+                            document.getElementById("lbl_csv").innerText = 'กรุณาเลือกช่องทางการชำระเงิน';
+                            document.getElementById("lbl_csv").style.color = "red";
+                            return;
+
+                        } else {
+
+
+                            document.getElementById("_address").style.borderColor = "none";
+                            document.getElementById("_list").style.borderColor = "none";
+                            document.getElementById("_amount").style.borderColor = "none";
+                            document.getElementById("_startdate").style.borderColor = "none";
+                            document.getElementById("_duedate").style.borderColor = "none";
+                            document.getElementById("idInvoice").style.borderColor = "none";
+                            document.getElementById("_creditDate").style.borderColor = "none";
+                            document.getElementById("via").style.borderColor = "none";
+                            document.getElementById("credit").style.borderColor = "none";
+
+                            var today = new Date();
+                            var _creditDate = document.getElementById("_creditDate").value
+                            var ti = today.toLocaleTimeString('en-US', {
+                                hour12: false,
+                                hour: "numeric",
+                                minute: "numeric"
+                            }).padStart(2, '0');
+                            var sp_date = _creditDate.split("/");
+                            var creditDate = sp_date[1] + '/' + sp_date[0] + '/' + sp_date[2] + ", " + ti;
+
+
+                            var _via = document.getElementById("via").value
+                            var _credit = document.getElementById("credit").value
+                            var _name = Cookies.get('username');
+
+                            var _amount = document.getElementById("_amount").value;
+                            var _idInvoice = document.getElementById("idInvoice").value;
+
+                            const datainvoice = {
+                                _idInvoice: _idInvoice,
+                                amount: _amount,
+                                credit: _credit,
+                                remain: "0",
+                                via: _via,
+                                creditDate: creditDate,
+                                receiveName: _name
+                            }
+                            // console.log(datainvoice)
+
+                            const url = urlipaddress + 'payment';
+
+                            axios.post(url, datainvoice
+                            ).then(function (response) {
+
+                                if (response.data.message.data == "can't update to database") {
+                                    console.log('cant update to database')
+                                    document.getElementById("lbl_csv").innerText = 'บันทึกข้อมูลไม่สำเร็จ !!!';
+                                    document.getElementById("lbl_csv").style.color = "red";
+                                    return;
+                                } else {
+                                    document.getElementById("statuspayment").value = "ชำระแล้ว";
+                                    document.getElementById("statuspayment").style.color = "green";
+
+
+                                    document.getElementById("lbl_csv").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                    document.getElementById("lbl_csv").style.color = "green";
+
+                                }
+
+                            }).catch(function (res) {
+                                
+                                const { response } = res
+
+                                document.getElementById("lbl_csv").innerText = 'บันทึกข้อมูลไม่สำเร็จ !!!';
+                                    document.getElementById("lbl_csv").style.color = "red";
+                               
+                            });
+                        }
+
+                    });
+
+                }
+            </script>
+
+            <div class="container">
+                <div class="modal fade" id="myModaldont" role="dialog">
+                    <div class="modal-dialog" style="width: 400px; height: 200px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="title" class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-20">
+                                            <i class="fa fa-exclamation-triangle" id="c_delete"
+                                                style="font-size:48px;color:red"></i>
+                                            <i class="fa fa-check-circle" id="completed"
+                                                style="font-size:48px;color:green; display: none;"></i>
+                                        </div>
+                                        <div>
+                                            <label id="lbl_completed" for="fname"> </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="text-align: right;">
+
+                                <div class="row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div>
+                                        <button type="button" class="btn btn-default" id="btn_print">
+                                            <p><a target="_blank" href="print.html" id="print">
+                                                    พิมพ์ใบเสร็จ</a></p>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button"
+                                            class="btn btn-default" data-dismiss="modal">ปิด
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <!-- <script src="../../plugins/bootstrap/js/bootstrap.js"></script> -->
+
+    <!-- Select Plugin Js -->
+    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="../../plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../../plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+</body>
+
+</html>

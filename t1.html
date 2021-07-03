@@ -1,0 +1,39 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+<input type="button" value="AAAA" onclick="t1()">
+
+
+<script>
+    function t1(){
+        window.open("t2.html",'DescriptiveWindowName' ,'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=800, height=600');
+         //window.open('t2.html'
+    // 'Window',
+    // 'location=no,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,addressbar=0,titlebar=no,directories=no,channelmode=no,status=no');
+    // // Hack to bypass the confirm alert on window close.
+    // window.opener = window.top;
+    // window.open('', '_self', '');
+    // window.close();
+    }
+</script>
+
+<!-- <script type="text/javascript">
+var WindowObjectReference; // global variable
+function openRequestedPopup()
+{
+WindowObjectReference = window.open("t2.html",
+"DescriptiveWindowName", "resizable=yes,scrollbars=yes,status=yes");
+}
+</script> -->
+</body>
+</html>

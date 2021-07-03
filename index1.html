@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+    <title></title>
+   <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <link rel="stylesheet" href="css/stylelogin.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+
+        .bg {
+            /* The image used */
+            /* background-image: url("img/3.jpg"); */
+            /* Full height */
+            height: 90%;
+            /* Center and scale the image nicely  style="background-image:url(EasyImage/3.jpg);" */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+
+<body class="bg">
+    <div id="dialog" class="dialog dialog-effect-in">
+        <div class="dialog-front">
+            <div class="dialog-content">
+                <form id="login_form" class="dialog-form" action="">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="user_username" class="control-label">ชื่อเข้าใช้งาน :</label>
+                            <input type="text" id="user_username" class="form-control" name="user_username" autofocus />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_password" class="control-label">รหัสผ่าน :</label>
+                            <input type="password" id="user_password" class="form-control" name="user_password" />
+                        </div>
+                        <div class="text-center pad-top-20" style="display: none;">
+                            <p>คลิกเมื่อคุณลืม<br><a href="#" class="link"><strong>ชื่อเข้าใช้งาน</strong></a> หรือ <a
+                                    href="#" class="link"><strong>รหัสผ่าน</strong></a>?</p>
+                        </div>
+                        <div class="pad-top-20 pad-btm-20">
+                            <input type="button" class="btn btn-default btn-block btn-lg" id="myButton"
+                                style="background-color:#f56a6a;" value="เข้าสู่ระบบ">
+                        </div>
+                        <p id="lbCheck" style="color: red;"></p>
+
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <dx:ASPxLabel ID="lbCopy" runat="server" Font-Size="6pt" ForeColor="#BDBDBD">
+                                    </dx:ASPxLabel>
+                                </td>
+                                <td style="text-align:right;">
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        Cookies.remove('username');
+    </script>
+
+    <script>
+
+        $("#user_username").keyup(function (event) {
+            if (event.keyCode === 13) {
+                $("#myButton").click();
+            }
+        });
+        $("#user_password").keyup(function (event) {
+            if (event.keyCode === 13) {
+                $("#myButton").click();
+            }
+        });
+        $("#myButton").click(function () {
+
+            postdataLogin();
+        });
+
+
+        // LOGIN FORM: Validation function
+        function postdataLogin() {
+
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+											var urlipaddress = data.substring(1, data.length - 1);
+
+                //   alert(urlipaddress)
+                if (document.getElementById("user_username").value == '' || document.getElementById("user_password").value == '') {
+                    //var _password = document.getElementById("password").value;
+                    document.getElementById("user_username").style.borderColor = "red";
+                    document.getElementById("user_password").style.borderColor = "red";
+
+                    // Set a cookie
+                    //Create a cookie that expires 7 days from now, valid across the entire site:
+
+                    return;
+                } else {
+                    document.getElementById("user_username").style.borderColor = null;
+                    document.getElementById("user_password").style.borderColor = null;
+
+                    var _username = document.getElementById("user_username").value;
+                    var _password = document.getElementById("user_password").value;
+
+                    if (_username == 'wacadmin' && _password == 'wacpassword') {
+                        // alert('cdscvfds')
+                        Cookies.set('username', 'wacsuperAdmin', { expires: 1 })
+                        location.href = "viewdashboard.html";
+                        return;
+                    }
+
+
+                    const dataUser = {
+                        username: _username,
+                        password: _password
+                    }
+                    const url = urlipaddress + 'loginAd';
+                    axios.post(url, dataUser
+                    ).then(function (response) {
+                        Cookies.set('username', response.data.message[0].name, { expires: 1 })
+                        location.href = "dashboard.html";
+
+                    }).catch(function (res) {
+                        const { response } = res
+
+                        $('#lbCheck').text('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง !!')
+                        // .("Username and password invalid !");
+                    });
+                }
+
+            });
+        }
+
+    </script>
+</body>
+
+</html>
